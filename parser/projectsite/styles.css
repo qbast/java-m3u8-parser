@@ -1,0 +1,42 @@
+body { 
+	background: #eeeeee; 
+	font-family: Verdana;
+	
+}		
+
+.maven {
+	width: 500px;
+}
+
+.linklist {
+	list-style-type: none;
+}
+.link { 
+		font-size: small;
+		color: #080080;
+		font-weight: bold;
+}
+
+.code {
+	background: #dddddd; 
+	font-family: Verdana;
+	width: 500px;
+	font-size: small
+}
+
+.logo {
+	border-style: none;
+	border-left-width: 0px;
+	text-align: center;
+}
+
+.sourceforge {
+	background: black;
+}
+
+.sflink {
+	font-size: small;
+	color: #ffffff;
+	font-weight: bold;
+	
+}

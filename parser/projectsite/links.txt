@@ -1,0 +1,17 @@
+http://www.ioncannon.net/programming/475/iphone-windowed-http-live-streaming-using-amazon-s3-and-cloudfront-proof-of-concept/
+http://developer.apple.com/iphone/library/documentation/NetworkingInternet/Conceptual/StreamingMediaGuide/UsingHTTPLiveStreaming/UsingHTTPLiveStreaming.html
+
+
+Video Audio Format:
+The protocol specification is capable of accommodating other formats, but only MPEG-2 
+video streams (with H.264 video and AAC audio) or MPEG elementary audio streams 
+(in AAC format with HTDS headers or in MP3 format) are supported at this time.
+
+
+	
+
+File extension		MIME type
+
+.M3U8			application/x-mpegURL
+
+.ts			video/MP2T
