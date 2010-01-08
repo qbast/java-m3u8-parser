@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://m3u8parser.chilicat.net" href="$outputFile">
+ <information>
+    <title>M3u8 Parser Test App</title>
+    <vendor>chilicat.net</vendor>
+    <homepage href="http://m3u8parser.chilicat.net"/>
+    <description kind="one-line">m3u8 Parser</description>
+    <description kind="short">m3u8 Parser</description>
+    <description kind="tooltip">m3u8 Parser</description>
+    <shortcut online="false"><desktop/><menu submenu="Chilicat m3u8parser TestApp"/></shortcut>
+ </information>
+
+ <offline-allowed/>
+
+ <security>
+	<all-permissions/>
+ </security>
+ 
+ <resources>
+    <j2se version="1.5+" initial-heap-size="32m" max-heap-size="64m" />
+    <property name="jnlp.versionEnabled" value="true"/>
+    $dependencies
+ </resources>
+
+ <application-desc main-class="$mainClass">
+ </application-desc>
+</jnlp>

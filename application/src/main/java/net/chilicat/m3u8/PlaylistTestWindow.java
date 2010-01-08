@@ -34,7 +34,7 @@ class PlaylistTestWindow extends javax.swing.JFrame {
 
     private final Logger log = Logger.getLogger(getClass().getName());
 
-    private final JComboBox protocolBox;
+    private final JLabel protocolBox;
     private final JTextField pathField;
     private final JButton browseButton, startButton;
 
@@ -49,10 +49,7 @@ class PlaylistTestWindow extends javax.swing.JFrame {
     public PlaylistTestWindow() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(500, 500);
-        protocolBox = new JComboBox(new String[]{
-                "Http:",
-                "File:"
-        });
+        protocolBox = new JLabel("URL:");
 
         pathField = new JTextField();
         pathField.setText("http://devimages.apple.com/iphone/samples/bipbop/gear1/prog_index.m3u8");
@@ -99,7 +96,6 @@ class PlaylistTestWindow extends javax.swing.JFrame {
     }
 
     private void openFileBrowser() {
-        protocolBox.setSelectedIndex(1);
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int res = chooser.showDialog(this, "Open");
@@ -154,7 +150,12 @@ class PlaylistTestWindow extends javax.swing.JFrame {
 
         @Override
         public void success(Playlist playlist) {
-            output.setText(new PlaylistFormat(playlist).format());
+            StringWriter str = new StringWriter(100);
+            PrintWriter pwriter = new PrintWriter(str);
+
+            new PlaylistFormat(playlist).format(pwriter);
+
+            output.setText(str.toString());
         }
 
         @Override

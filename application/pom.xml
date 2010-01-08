@@ -1,27 +1,72 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>net.chilicat.m3u8</groupId>
-    <artifactId>m3u8parser-application</artifactId>
-    <packaging>jar</packaging>
-    <version>0.1</version>
-    <name>m3u8-application</name>
-    <url>http://m3u8parser.chilicat.net/</url>
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.chilicat.m3u8</groupId>
+	<artifactId>m3u8parser-application</artifactId>
+	<packaging>jar</packaging>
+	<version>0.1</version>
+	<name>m3u8-application</name>
+	<url>http://m3u8parser.chilicat.net/</url>
 	
 	<parent>
-        <groupId>net.chilicat.m3u8</groupId>
-        <artifactId>parent</artifactId>
-        <version>1.0</version>
+		<groupId>net.chilicat.m3u8</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0</version>
 		<relativePath>..</relativePath>
-    </parent>
+	</parent>
 
 	<dependencies>
-        <dependency>
-            <groupId>net.chilicat.m3u8</groupId>
-            <artifactId>m3u8parser</artifactId>
-            <version>0.1</version>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>net.chilicat.m3u8</groupId>
+			<artifactId>m3u8parser</artifactId>
+			<version>0.1</version>
+		</dependency>
+	</dependencies>
 
+	
+<build>
+	<plugins>
+		<plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>webstart-maven-plugin</artifactId>
+		<version>1.0-alpha-1</version>
+	</plugin>
+	</plugins>
+	<pluginManagement>
+		<plugins>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>webstart-maven-plugin</artifactId>
+			
+			<configuration>
+				   <jnlp>
+					<mainClass>net.chilicat.m3u8.Main</mainClass>
+				   </jnlp>
+				  <sign>
+				   <keystore>chilicat.jks</keystore>
+				   <keypass>cateatchili</keypass>
+				   <storepass>chilicat</storepass>
+				   <storetype>jks</storetype>
+				   <alias>chilicat</alias>
+				   <verify>true</verify>
+				 </sign>
+				<verbose>true</verbose>
+			</configuration>
+
+		</plugin>
+	</plugins>
+	</pluginManagement>
+</build>
+	
+<repositories>
+	<repository>
+		<id>mvnrepository</id>
+		<url>http://mvnrepository.com</url>
+	</repository>
+	<repository>
+		<id>ibiblio</id>
+		<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+	</repository>
+</repositories>
 	
 </project>
