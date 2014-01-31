@@ -150,12 +150,8 @@ class PlaylistTestWindow extends javax.swing.JFrame {
 
         @Override
         public void success(Playlist playlist) {
-            StringWriter str = new StringWriter(100);
-            PrintWriter pwriter = new PrintWriter(str);
 
-            new PlaylistFormat(playlist).format(pwriter);
-
-            output.setText(str.toString());
+            output.setText(new PlaylistFormat(playlist).format());
         }
 
         @Override

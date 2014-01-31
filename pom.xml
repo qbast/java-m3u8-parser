@@ -13,11 +13,6 @@
 		<module>application</module>
 	</modules>
 	
-    <parent>
-        <groupId>net.chilicat</groupId>
-        <artifactId>chilicat-parent</artifactId>
-        <version>1.0</version>
-    </parent>
 
     <dependencies>
         <dependency>

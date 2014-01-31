@@ -10,7 +10,7 @@
 
     <parent>
         <groupId>net.chilicat.m3u8</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>m3u8-parent</artifactId>
         <version>1.0</version>
 		<relativePath>..</relativePath>
     </parent>
