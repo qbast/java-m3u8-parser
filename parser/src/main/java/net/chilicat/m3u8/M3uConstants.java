@@ -139,7 +139,7 @@ final class M3uConstants {
      * <p/>
      * #EXT-X-DISCONTINUITY
      */
-    private final static String EXT_X_DISCONTINUITY = "#EXT-X-DISCONTINUITY";
+    final static String EXT_X_DISCONTINUITY = "#EXT-X-DISCONTINUITY";
 
     /**
      * A holder class for Patterns.
@@ -149,7 +149,7 @@ final class M3uConstants {
             throw new AssertionError();
         }
 
-        final static Pattern EXTINF = Pattern.compile(tagPattern(M3uConstants.EXTINF) + "\\s*(-1|[0-9]*)\\s*(?:,((.*)))?");
+        final static Pattern EXTINF = Pattern.compile(tagPattern(M3uConstants.EXTINF) + "\\s*(-1|[0-9\\.]*)\\s*(?:,((.*)))?");
 
         private static String tagPattern(String tagName) {
             return "\\s*" + tagName + "\\s*:\\s*";

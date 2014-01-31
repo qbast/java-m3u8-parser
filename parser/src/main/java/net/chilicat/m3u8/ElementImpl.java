@@ -8,12 +8,14 @@ import java.net.URI;
 final class ElementImpl implements Element {
     private final PlaylistInfo playlistInfo;
     private final EncryptionInfo encryptionInfo;
-    private final int duration;
+    private final double duration;
     private final URI uri;
+    private final boolean discontinuity;
     private final String title;
     private final long programDate;
 
-    public ElementImpl(PlaylistInfo playlistInfo, EncryptionInfo encryptionInfo, int duration, URI uri, String title, long programDate) {
+    public ElementImpl(PlaylistInfo playlistInfo, EncryptionInfo encryptionInfo, double duration, URI uri,
+    		String title, long programDate, boolean discontinuity) {
         if (uri == null) {
             throw new NullPointerException("uri");
         }
@@ -29,6 +31,7 @@ final class ElementImpl implements Element {
         this.duration = duration;
         this.uri = uri;
         this.title = title;
+        this.discontinuity=discontinuity;
         this.programDate = programDate;
     }
 
@@ -37,7 +40,14 @@ final class ElementImpl implements Element {
     }
 
     public int getDuration() {
-        return duration;
+        return (int)Math.round(duration);
+    }
+    
+    public boolean isDiscontinuity() {
+    	return discontinuity;
+    }
+    public double getExactDuration() {
+    	return duration;
     }
 
     public URI getURI() {
@@ -73,6 +83,7 @@ final class ElementImpl implements Element {
         return "ElementImpl{" +
                 "playlistInfo=" + playlistInfo +
                 ", encryptionInfo=" + encryptionInfo +
+                ", discontinuity=" +discontinuity +
                 ", duration=" + duration +
                 ", uri=" + uri +
                 ", title='" + title + '\'' +

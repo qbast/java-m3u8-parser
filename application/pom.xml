@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>net.chilicat.m3u8</groupId>
 			<artifactId>m3u8parser</artifactId>
-			<version>0.1</version>
+			<version>0.2</version>
 		</dependency>
 	</dependencies>
 

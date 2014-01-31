@@ -82,6 +82,8 @@ final class PlaylistParser {
                             throw new ParseException(line, lineNumber, EXT_X_MEDIA_SEQUENCE + " duplicated");
                         }
                         mediaSequenceNumber = parseMediaSequence(line, lineNumber);
+                    } else if (line.startsWith(EXT_X_DISCONTINUITY)) {
+                    	builder.discontinuity(true);
                     } else if (line.startsWith(EXT_X_PROGRAM_DATE_TIME)) {
                         long programDateTime = parseProgramDateTime(line, lineNumber);
                         builder.programDate(programDateTime);
@@ -171,7 +173,7 @@ final class PlaylistParser {
         String title = matcher.groupCount() > 1 ? matcher.group(2) : "";
 
         try {
-            builder.duration(Integer.valueOf(duration)).title(title);
+            builder.duration(Double.valueOf(duration)).title(title);
         } catch (NumberFormatException e) {
             // should not happen because of 
             throw new ParseException(line, lineNumber, e);

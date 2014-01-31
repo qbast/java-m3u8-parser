@@ -12,8 +12,21 @@ public interface Element {
     public String getTitle();
 
 
+    /**
+     * Return item duration rounded to nearest integer. This is compatible with old
+     * versions of m3u8 draft
+     * @return
+     */
     public int getDuration();
 
+    
+    /**
+     * Return item duration as it appears in m3u8. This allows to properly support new playlists
+     * with fractional durations
+     * @return
+     */
+    public double getExactDuration();
+    
     /**
      * URI to media or playlist.
      *
@@ -41,6 +54,12 @@ public interface Element {
      * @return true if element a media file and not a playlist.
      */
     public boolean isMedia();
+    
+    /**
+     * There is discontinuity before this element
+     * @return
+     */
+    public boolean isDiscontinuity();
 
     /**
      * If media is encryped than will this method return a info object.

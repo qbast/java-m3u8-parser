@@ -25,7 +25,7 @@ class PlaylistFormat {
 
         int index = 0;
         for (Element el : pl) {
-            buf.append(ELEMENT).append(index).append(": ").append(" Dur: ").append(el.getDuration()).append(" URI: ").append(el.getURI()).append(" Title: ").append(el.getTitle());
+            buf.append(ELEMENT).append(index).append(": ").append(" Dur: ").append(el.getExactDuration()).append(" DIS: ").append(el.isDiscontinuity()).append(" URI: ").append(el.getURI()).append(" Title: ").append(el.getTitle());
         }
         return buf.toString();
     }

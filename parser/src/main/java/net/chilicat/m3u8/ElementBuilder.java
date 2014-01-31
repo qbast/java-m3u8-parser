@@ -6,12 +6,13 @@ import java.net.URI;
  * @author dkuffner
  */
 class ElementBuilder {
-    private int duration;
+    private double duration;
     private URI uri;
     private PlaylistInfo playlistInfo;
     private EncryptionInfo encryptionInfo;
     private String title;
     private long programDate = -1;
+    private boolean discontinuity = false;
 
     public ElementBuilder() {
 
@@ -35,13 +36,18 @@ class ElementBuilder {
         return this;
     }
 
-    public int getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public ElementBuilder duration(int duration) {
+    public ElementBuilder duration(double duration) {
         this.duration = duration;
         return this;
+    }
+    
+    public ElementBuilder discontinuity(boolean d) {
+    	this.discontinuity=d;
+    	return this;
     }
 
     public URI getUri() {
@@ -73,6 +79,7 @@ class ElementBuilder {
         uri = null;
         title = null;
         programDate = -1;
+        discontinuity = false;
         resetEncryptedInfo();
         resetPlatListInfo();
         return this;
@@ -90,7 +97,7 @@ class ElementBuilder {
     }
 
     public Element create() {
-        return new ElementImpl(playlistInfo, encryptionInfo, duration, uri, title, programDate);
+        return new ElementImpl(playlistInfo, encryptionInfo, duration, uri, title, programDate,discontinuity);
     }
 
 }

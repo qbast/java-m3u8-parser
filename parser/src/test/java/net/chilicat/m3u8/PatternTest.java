@@ -55,6 +55,7 @@ public class PatternTest extends TestCase {
 
         String[] list = {
                 "#EXTINF:200,Title",
+                "#EXTINF:200.0,Title",
                 "\t  #EXTINF \t : \t 200 \t , \t Title\t",
                 //"#EXTINF:200,",
         };
@@ -65,7 +66,7 @@ public class PatternTest extends TestCase {
             Matcher matcher = patter.matcher(param);
             assertEquals("Index: " + index, true, matcher.find());
             assertEquals("Index: " + index, true, matcher.matches());
-            assertEquals("Index: " + index, 200, Integer.valueOf(matcher.group(1).trim()).intValue());
+            assertEquals("Index: " + index, 200.0, Double.valueOf(matcher.group(1).trim()).doubleValue());
             assertEquals("Index: " + index, "Title", matcher.group(2).trim());
 
             printGroups(index, matcher);
