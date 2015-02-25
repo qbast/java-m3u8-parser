@@ -129,7 +129,9 @@ final class PlaylistParser {
 	{
 		String ln = line.replace(EXT_X_STREAM_INF + ":", "");
 
-		String[] split = ln.split(","); //this isn't the proper way to parse these, this will break for paramters that can have comma separated lists for their value (ed CODECS)
+		//this isn't the proper way to parse these, this will break for parameters that
+		// can have comma separated lists for their value (eg CODECS)
+		String[] split = ln.split(",");
 
 		Map<String, String> params = new HashMap<String, String>();
 
