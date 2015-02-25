@@ -5,7 +5,9 @@ import java.net.URI;
 import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +53,7 @@ final class PlaylistParser {
         boolean firstLine = true;
 
         int lineNumber = 0;
-                          
+
         final List<Element> elements = new ArrayList<Element>(10);
         final ElementBuilder builder = new ElementBuilder();
         boolean endListSet = false;
@@ -89,7 +91,9 @@ final class PlaylistParser {
                         builder.programDate(programDateTime);
                     } else if (line.startsWith(EXT_X_KEY)) {
                         currentEncryption = parseEncryption(line, lineNumber);
-                    } else {
+                    } else if (line.startsWith(EXT_X_STREAM_INF)){
+		                parseStreamInf(line,builder);
+	                } else {
                         log.log(Level.FINE, new StringBuilder().append("Unknown: '").append(line).append("'").toString());
                     }
                 } else if (line.startsWith(COMMENT_PREFIX)) {
@@ -120,7 +124,30 @@ final class PlaylistParser {
         return new Playlist(Collections.unmodifiableList(elements), endListSet, targetDuration, mediaSequenceNumber);
     }
 
-    private URI toURI(String line) {
+
+	private void parseStreamInf(final String line, final ElementBuilder builder)
+	{
+		String ln = line.replace(EXT_X_STREAM_INF + ":", "");
+
+		String[] split = ln.split(","); //this isn't the proper way to parse these, this will break for paramters that can have comma separated lists for their value (ed CODECS)
+
+		Map<String, String> params = new HashMap<String, String>();
+
+		for (String kvp : split)
+		{
+			String param = kvp.substring(0, kvp.indexOf('='));
+			String value = kvp.substring(kvp.indexOf('=') + 1);
+			params.put(param, value);
+		}
+
+		final int programId = Integer.parseInt(params.get("PROGRAM-ID"));
+		final int bandwidth = Integer.parseInt(params.get("BANDWIDTH"));
+
+		builder.playList(programId, bandwidth, null);
+	}
+
+
+	private URI toURI(String line) {
         try {
             return (URI.create(line));
         } catch (IllegalArgumentException e) {
@@ -175,7 +202,7 @@ final class PlaylistParser {
         try {
             builder.duration(Double.valueOf(duration)).title(title);
         } catch (NumberFormatException e) {
-            // should not happen because of 
+            // should not happen because of
             throw new ParseException(line, lineNumber, e);
         }
     }
